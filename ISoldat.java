@@ -2,7 +2,7 @@
 
 public interface ISoldat {
 
-	static enum TypesH {
+	public static enum TypesH {
     
 		HUMAIN (40,3,10,2), NAIN (80,1,20,0), ELF (70,5,10,6), HOBBIT (20,3,5,2);
 		private final int POINTS_DE_VIE, PORTEE_VISUELLE, PUISSANCE, TIR;
@@ -16,6 +16,14 @@ public interface ISoldat {
 		public int getPortee() { return PORTEE_VISUELLE; }
 		public int getPuissance() { return PUISSANCE; }
 		public int getTir() { return TIR; }
+		public boolean enVie()
+	    {
+	        if (getPoints() > 0) return true;
+	        else {
+	            //si mort destruction personnage
+	            return false;
+	        }
+	    }
 		
 		public static TypesH getTypeHAlea() {
 			return values()[(int)(Math.random()*values().length)];
@@ -33,7 +41,15 @@ public interface ISoldat {
 		public int getPoints() { return POINTS_DE_VIE; }
 		public int getPortee() { return PORTEE_VISUELLE; }
 		public int getPuissance() { return PUISSANCE; }
-		public int getTir() { return TIR; } 
+		public int getTir() { return TIR; }
+		public boolean enVie()
+	    {
+	        if (getPoints() > 0) return true;
+	        else {
+	            //si mort destruction personnage
+	            return false;
+	        }
+	    }
 		
 		public static TypesM getTypeMAlea() {
 			return values()[(int)(Math.random()*values().length)];
