@@ -1,3 +1,4 @@
+package wargame;
  
 import java.awt.Color;
 
@@ -12,6 +13,6 @@ public class Obstacle extends Element {
 		}
 	}
 	private TypeObstacle TYPE;
-	Obstacle(TypeObstacle type, Position pos) { TYPE = type; this.pos = pos; }
+	Obstacle(TypeObstacle type, Position pos) { super(); TYPE = type; this.pos = pos; }
 	public String toString() { return ""+TYPE; }
 }

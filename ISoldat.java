@@ -1,3 +1,4 @@
+package wargame;
  
 
 public interface ISoldat {

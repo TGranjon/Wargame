@@ -1,3 +1,4 @@
+package wargame;
 public class Monstre extends Soldat {
 
     private static int num_monstre = 0;

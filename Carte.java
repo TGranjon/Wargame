@@ -1,3 +1,4 @@
+package wargame;
 import java.awt.Graphics;
 
 public class Carte implements ICarte, IConfig {
@@ -7,7 +8,6 @@ public class Carte implements ICarte, IConfig {
 		for(i=0;i<NB_HEROS;i++)
 		{
 			new Heros(this,ISoldat.TypesH.getTypeHAlea(),(char)('A'+i),trouvePositionVideSoldat());
-			/*new Position((int)Math.round((Math.random()*5)),(int)Math.round((Math.random()*HAUTEUR_CARTE)))*/
 		}
 		for(i=0;i<NB_MONSTRES;i++)
 		{
@@ -17,22 +17,62 @@ public class Carte implements ICarte, IConfig {
 		{
 			new Obstacle(Obstacle.TypeObstacle.getObstacleAlea(),trouvePositionVide());
 		}
+		/*Implementer cases vides et inconnues (portée visuelle)*/
 	}
 	public Element getElement(Position pos) {
 		// TODO Auto-generated method stub
 		return null;
 	}
 	public Position trouvePositionVideSoldat() {
-		// TODO Auto-generated method stub
-		return null;
+		Position pos = new Position((int)Math.round((Math.random()*5)),(int)Math.round((Math.random()*HAUTEUR_CARTE)));
+		if(pos.estValide()==true && pos.getVide()==true)
+		{
+			pos.setVide(false);
+			return pos;
+		}
+		else
+		{
+			while(pos.estValide()==false || pos.getVide()==false)
+			{
+				pos = new Position((int)Math.round((Math.random()*5)),(int)Math.round((Math.random()*HAUTEUR_CARTE)));
+			}
+			pos.setVide(false);
+			return pos;
+		}
 	}
 	public Position trouvePositionVideMonstre() {
-		// TODO Auto-generated method stub
-		return null;
+		Position pos = new Position((int)Math.round((Math.random()*LARGEUR_CARTE-5)),(int)Math.round((Math.random()*HAUTEUR_CARTE)));
+		if(pos.estValide()==true && pos.getVide()==true)
+		{
+			pos.setVide(false);
+			return pos;
+		}
+		else
+		{
+			while(pos.estValide()==false || pos.getVide()==false)
+			{
+				pos = new Position((int)Math.round((Math.random()*LARGEUR_CARTE-5)),(int)Math.round((Math.random()*HAUTEUR_CARTE)));
+			}
+			pos.setVide(false);
+			return pos;
+		}
 	}
 	public Position trouvePositionVide() {
-		// TODO Auto-generated method stub
-		return null;
+		Position pos = new Position((int)Math.round((Math.random()*LARGEUR_CARTE)),(int)Math.round((Math.random()*HAUTEUR_CARTE)));
+		if(pos.estValide()==true && pos.getVide()==true)
+		{
+			pos.setVide(false);
+			return pos;
+		}
+		else
+		{
+			while(pos.estValide()==false || pos.getVide()==false)
+			{
+				pos = new Position((int)Math.round((Math.random()*LARGEUR_CARTE)),(int)Math.round((Math.random()*HAUTEUR_CARTE)));
+			}
+			pos.setVide(false);
+			return pos;
+		}
 	}
 	public Position trouvePositionVide(Position pos) {
 		// TODO Auto-generated method stub
@@ -52,7 +92,6 @@ public class Carte implements ICarte, IConfig {
 	}
 	public void mort(Soldat perso) {
 		// TODO Auto-generated method stub
-		
 	}
 	public boolean actionHeros(Position pos, Position pos2) {
 		// TODO Auto-generated method stub
