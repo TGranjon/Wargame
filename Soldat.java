@@ -1,20 +1,94 @@
 package wargame;
 
-import java.awt.Color;
+ 
 
-public class Soldat extends Element{
+public abstract class Soldat extends Element implements ISoldat {
+	/** Vie d'un soldat. */
+	private int vie; // c'est les points de vie restants 	
+
+	/** Est mort ? */
+	private boolean mort = false;	
+	/** En train de se deplacer. */
+	private boolean seDeplace = false;	
+	/** Le tour est effectué */
+	private boolean tourEffectue = false;
 	
-	public enum TypeSoldat {
-		HEROS (COULEUR_HEROS), MONSTRES (COULEUR_MONSTRES), HEROS_DEJA_JOUE (COULEUR_HEROS_DEJA_JOUE);
-		private final Color COULEUR;
-		TypeSoldat(Color couleur) { COULEUR = couleur; }
-	}
-	private TypeSoldat TYPE;
-	public Soldat(){}
-    public Soldat(TypeSoldat type, Position pos) { super(); TYPE = type; this.pos = pos; }    
+	private final int POINTS_DE_VIE_MAX, PUISSANCE, TIR ,PORTEE_VISUELLE;
+	
+    public Soldat(Carte carte,int pts, int portee, int puiss, int tir, Position pos) {
+    	POINTS_DE_VIE_MAX=vie = pts;
+    	PUISSANCE=puiss;
+    	TIR= tir;
+    	PORTEE_VISUELLE=portee;
+    	this.carte=carte;
+    	this.position=pos;
+    	
+    }
+    
 	public void joueTour(int tour){}
-	public void combat(Soldat soldat){}
-	public void seDeplace(Position newPos){}
-	public String toString() { return ""+TYPE; }
+	public void combat(Soldat soldat){
+		
+		
+	}
+	public void seDeplace(Position newPos){
+		
+	}
+
+	
+	
+	public int getVie() 
+	{
+		return vie;
+	}
+	public void setVie(int vie) 
+	{
+		this.vie = ((vie > this.getVieMax()) ? this.getVieMax() : (vie < 0 ) ? 0 : vie);
+	}
+	/*********** a revoir ***********/
+	public boolean enVie()
+
+    {
+        if (this.getVie() > 0) return true;
+        else {
+            //si mort destruction personnage
+            return false;
+        }
+    }
+	public void setSeDeplace(boolean b)
+	{
+		this.seDeplace = b;
+	}
+	public boolean getSeDeplace()
+	{
+		return this.seDeplace;
+	}
+	public boolean estMort() {
+		return mort;
+	}
+	public boolean getAJoue() {
+		return tourEffectue;
+		
+	}	
+	
+	public void setAJoue(boolean v) {
+		tourEffectue = v;
+	}
+	
+
+	public void setMort(boolean mort) {
+		if(mort){
+			
+		}
+		else{
+			this.mort = false;
+		}
+	}
+
+
+
+
+	
+	
+	
 
 }

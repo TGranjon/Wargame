@@ -1,21 +1,52 @@
 package wargame;
 
 import java.awt.Color;
+import java.util.ArrayList;
 
 public abstract class Element implements IConfig{
 
-	protected Position pos;
-	public enum TypeElement {
-		VIDE(COULEUR_VIDE), INCONNU(COULEUR_INCONNU);
-		private final Color COULEUR;
-		TypeElement(Color couleur) { COULEUR = couleur; }
+	/** Numéro de la case où se situe le soldat. */
+	protected Position position;
+	/** Praticabilité. Une personne peut-elle marcher dessus ? */
+	public boolean praticable;
+	/**** la couleur de l'element****/
+	protected Color couleur;
+	protected Carte carte;
+	protected boolean visible;
+	
+
+
+	
+	
+	
+	Element (){
+	this.praticable=true;
+	this.visible=false;
+		
+		
 	}
-	private TypeElement TYPE;
-	public Element(){}
-	public Element(TypeElement type, Position pos) 
-	{ 
-		TYPE = type;
-		this.pos = pos;
+	public Position getPosition() {
+		return position;
 	}
-	public String toString() { return ""+TYPE; }
+	public void setPosition(Position position) {
+		this.position = position;
+	}
+	public boolean estPraticable()
+	{
+		return praticable;
+	}
+	public void setPraticable(boolean praticable)
+	{
+		this.praticable = praticable;
+	}
+	public void setCouleur(Color couleur){
+		this.couleur=couleur;
+	}
+	public Color getCouleur(){
+		return this.couleur;
+	}
+	public boolean getVisible(){return this.visible;}
+	public void setVisible(boolean v){this.visible=v;}
+
+
 }

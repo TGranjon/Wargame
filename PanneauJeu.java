@@ -1,10 +1,13 @@
 package wargame;
- 
 
-public class PanneauJeu {
+
+import javax.swing.JPanel;
+
+public class PanneauJeu extends JPanel {
 
 	public PanneauJeu() {
-		// TODO Auto-generated constructor stub
+
 	}
+
 
 }
