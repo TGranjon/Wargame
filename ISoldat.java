@@ -1,8 +1,10 @@
- 
+package wargame;
+
+import wargame.ISoldat.TypesH;
 
 public interface ISoldat {
 
-	static enum TypesH {
+	public static enum TypesH {
     
 		HUMAIN (40,3,10,2), NAIN (80,1,20,0), ELF (70,5,10,6), HOBBIT (20,3,5,2);
 		private final int POINTS_DE_VIE, PORTEE_VISUELLE, PUISSANCE, TIR;
@@ -16,7 +18,7 @@ public interface ISoldat {
 		public int getPortee() { return PORTEE_VISUELLE; }
 		public int getPuissance() { return PUISSANCE; }
 		public int getTir() { return TIR; }
-		
+	
 		public static TypesH getTypeHAlea() {
 			return values()[(int)(Math.random()*values().length)];
 		}
@@ -33,15 +35,27 @@ public interface ISoldat {
 		public int getPoints() { return POINTS_DE_VIE; }
 		public int getPortee() { return PORTEE_VISUELLE; }
 		public int getPuissance() { return PUISSANCE; }
-		public int getTir() { return TIR; } 
+		public int getTir() { return TIR; }
+	
 		
 		public static TypesM getTypeMAlea() {
 			return values()[(int)(Math.random()*values().length)];
 		}
 	}
+	int getPortee();
+	int getPuissance();
+	int getTir();
+	int getVieMax();
+	int getVie();
 	
-	int getPoints(); int getTour(); int getPortee();
-	boolean enVie();
+		boolean getSeDeplace();
+		void setSeDeplace(boolean value);	
+		void setMort(boolean mort);
+		void setPosition(Position position);
+		void setAJoue(boolean value);
+		void setVie(int vie);
+
+
 	void joueTour(int tour);
 	void combat(Soldat soldat);
 	void seDeplace(Position newPos);

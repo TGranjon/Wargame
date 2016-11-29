@@ -1,28 +1,94 @@
+package wargame;
+
  
 
-public class Soldat {
+public abstract class Soldat extends Element implements ISoldat {
+	/** Vie d'un soldat. */
+	private int vie; // c'est les points de vie restants 	
 
-    public Soldat() {
-        // TODO Auto-generated constructor   stub
+	/** Est mort ? */
+	private boolean mort = false;	
+	/** En train de se deplacer. */
+	private boolean seDeplace = false;	
+	/** Le tour est effectué */
+	private boolean tourEffectue = false;
+	
+	private final int POINTS_DE_VIE_MAX, PUISSANCE, TIR ,PORTEE_VISUELLE;
+	
+    public Soldat(Carte carte,int pts, int portee, int puiss, int tir, Position pos) {
+    	POINTS_DE_VIE_MAX=vie = pts;
+    	PUISSANCE=puiss;
+    	TIR= tir;
+    	PORTEE_VISUELLE=portee;
+    	this.carte=carte;
+    	this.position=pos;
+    	
     }
     
-    boolean enVie()
+	public void joueTour(int tour){}
+	public void combat(Soldat soldat){
+		
+		
+	}
+	public void seDeplace(Position newPos){
+		
+	}
+
+	
+	
+	public int getVie() 
+	{
+		return vie;
+	}
+	public void setVie(int vie) 
+	{
+		this.vie = ((vie > this.getVieMax()) ? this.getVieMax() : (vie < 0 ) ? 0 : vie);
+	}
+	/*********** a revoir ***********/
+	public boolean enVie()
+
     {
-        if (this.POINTS_DE_VIE > 0) return true;
+        if (this.getVie() > 0) return true;
         else {
             //si mort destruction personnage
             return false;
         }
     }
-    /* 
-     * int getPoints()
-    {
-        
-    }
-    int getTour(); 
-    int getPortee();
-	void joueTour(int tour);
-	void combat(Soldat soldat);
-	void seDeplace(Position newPos);*/
+	public void setSeDeplace(boolean b)
+	{
+		this.seDeplace = b;
+	}
+	public boolean getSeDeplace()
+	{
+		return this.seDeplace;
+	}
+	public boolean estMort() {
+		return mort;
+	}
+	public boolean getAJoue() {
+		return tourEffectue;
+		
+	}	
+	
+	public void setAJoue(boolean v) {
+		tourEffectue = v;
+	}
+	
+
+	public void setMort(boolean mort) {
+		if(mort){
+			
+		}
+		else{
+			this.mort = false;
+		}
+	}
+
+
+
+
+	
+	
+	
 
 }
