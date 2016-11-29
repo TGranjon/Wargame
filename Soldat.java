@@ -26,10 +26,12 @@ public abstract class Soldat extends Element implements ISoldat {
     }
     
 	public void joueTour(int tour){}
-	public void combat(Soldat soldat){
-		
-		
+	
+	public void combat(Soldat soldat)
+	{
+		soldat.vie -= this.PUISSANCE;	
 	}
+	
 	public void seDeplace(Position newPos){
 		
 	}
