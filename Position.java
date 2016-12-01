@@ -20,7 +20,11 @@ public class Position implements IConfig {
 	public boolean estValide() {
 		if (x<0 || x>=LARGEUR_CARTE || y<0 || y>=HAUTEUR_CARTE) return false; else return true;
 	}
-	public String toString() { return "("+x+","+y+")"; }
+	public String toString() 
+	{
+		return "A la position : ("+x+", "+y+")  "; 
+	}
+	
 	public boolean estVoisine(Position pos) {
 		return ((Math.abs(x-pos.x)<=1) && (Math.abs(y-pos.y)<=1));
 	}

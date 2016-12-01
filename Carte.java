@@ -1,5 +1,6 @@
 package wargame;
 import java.io.IOException;
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -12,6 +13,7 @@ import java.util.ArrayList;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 import javax.swing.Timer;
 
 public class Carte extends JPanel implements ICarte, ActionListener {
@@ -40,6 +42,8 @@ public class Carte extends JPanel implements ICarte, ActionListener {
 	private int caseCliquee = -1;
 	private JLabel imageDebutJeu;
 	
+	private JLabel information;
+	
 	public Carte() throws IOException {
 	
 		generer();
@@ -47,7 +51,12 @@ public class Carte extends JPanel implements ICarte, ActionListener {
 		//		 IConfig.HAUTEUR_CARTE * IConfig.NB_PIX_CASE));
 	 //	imageDebutJeu = new JLabel(new ImageIcon( this.getClass().getResource( "src/image_debut_jeu.png")));
 		//this.add(imageDebutJeu);
-
+		information = new JLabel();
+		this.add(information, BorderLayout.SOUTH);
+		information.setOpaque(true);
+		information.setPreferredSize(new Dimension(400, 30));
+		information.setHorizontalAlignment(SwingConstants.CENTER);
+		
 		   addMouseListener(new MouseAdapter() {
 		    	// Capture du clic sur la carte 
 				public void mouseClicked(MouseEvent e) { 
@@ -55,6 +64,8 @@ public class Carte extends JPanel implements ICarte, ActionListener {
 					Position pos = new Position(e.getX() / IConfig.NB_PIX_CASE , e.getY() / IConfig.NB_PIX_CASE);
 					int case_encours = pos.getNumCase();
 					System.out.println("la case cliqueeeeee: "+case_encours);
+					
+					information.setText(pos.toString() + getElement(pos));
 					
 					// On change de héros si la case n'est pas vide, qu'il s'agit bien d'un soldat et que le soldat est affiché. 
 					if(elements[case_encours] != null 
@@ -295,6 +306,18 @@ public int getMonstreList (int num){
 	return i;
 }
 	
+	public int getNbHerosRestant() {
+		return nbHerosRestant;
+	}
+	public void setNbHerosRestant(int nbHerosRestant) {
+		this.nbHerosRestant = nbHerosRestant;
+	}
+	public int getNbMonstresRestant() {
+		return nbMonstresRestant;
+	}
+	public void setNbMonstresRestant(int nbMonstresRestant) {
+		this.nbMonstresRestant = nbMonstresRestant;
+	}
 	/** Trouve aléatoirement une position vide sur la carte
 	/****** ATTENTION METHODE UTILISEE QUE POUR LA GENERATION DE LA CARTE AU DEBUT DU JEU !!!!*****/	
 	public Position trouvePositionVide() {
@@ -487,7 +510,20 @@ public boolean actionHeros(Position pos, Position pos2) {
 	}
 	
 	public void mort(Soldat perso) {
-		// TODO Auto-generated method stub
+		if(perso.estMort()==true)
+		{
+			if(perso instanceof Monstre)
+			{
+				this.setNbMonstresRestant(getNbMonstresRestant()-1);
+				heros.remove(perso);
+			}
+			else 
+			{
+				this.setNbHerosRestant(getNbHerosRestant()-1);
+				monstre.remove(perso);
+			}
+			elements[perso.position.getNumCase()]=new Vide();
+		}
 		
 	}
 	

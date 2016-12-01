@@ -49,4 +49,14 @@ public abstract class Element implements IConfig{
 	public void setVisible(boolean v){this.visible=v;}
 
 
+	public String toString() 
+	{
+		String info = "";
+		if (visible == false)
+		{
+			return "Cette case est cachée.";
+		}
+		info += "il y a un(e) " + this.getClass().getSimpleName();
+		return info; 
+	}
 }
