@@ -32,4 +32,10 @@ public class Heros extends Soldat {
 		return typeHeros;
 	}
 	public char getNom(){return this.NOM;}
+	
+	public String toString() 
+	{
+		return "il y a un "+getTypeHero() + ", vie : " + this.getVie() + ", puissance : " + this.getPuissance() + ", tir : " + this.getTir(); 
+	}
+	
 }

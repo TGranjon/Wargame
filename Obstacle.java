@@ -18,5 +18,5 @@ public class Obstacle extends Element {
 	public TypeObstacle getTypeObstacle (){ return this.TYPE;}
 	
 	Obstacle(TypeObstacle type, Position pos) { TYPE = type; this.position = pos; }
-	public String toString() { return ""+TYPE; }
+	public String toString() { return "il y a un(e) "+TYPE; }
 }

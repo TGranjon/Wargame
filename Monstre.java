@@ -51,6 +51,10 @@ public class Monstre extends Soldat {
 	}
 	public int getNumero(){return this.NUMERO;}
 	
+	public String toString() 
+	{
+		return "il y a un "+getTypeMonstre() + ", vie : " + this.getVie() + ", puissance : " + this.getPuissance() + ", tir : " + this.getTir(); 
+	}
 }
 
 

@@ -1,5 +1,6 @@
 package wargame;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -13,6 +14,7 @@ import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
@@ -20,14 +22,6 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.KeyStroke;
 import javax.swing.SwingConstants;
-
-//import com.sun.glass.events.KeyEvent;
-
-
-
-
-
-
 
 public class FenetreJeu extends JFrame {
     /**
@@ -45,13 +39,13 @@ public class FenetreJeu extends JFrame {
     JMenu charger;
     JMenu sauvegarder;
     JMenu jeu;
-  
+    
 	public FenetreJeu() throws IOException {
 		/* Création du titre et de l'icone */
 		super ("WarGame");
 		carte = new Carte();
 	
-		
+		/********* Taille de la carte non correcte !**********/
 		//carte.setBackground(Color.GRAY);
 		carte.setPreferredSize(new Dimension (IConfig.LARGEUR_CARTE * IConfig.NB_PIX_CASE, 
 				 IConfig.HAUTEUR_CARTE * IConfig.NB_PIX_CASE));
@@ -62,7 +56,6 @@ public class FenetreJeu extends JFrame {
 		 this.setLocation(IConfig.POSITION_X, IConfig.POSITION_Y);
 		
 		 setContentPane(carte);
-		
 		 
 		 /* Création des menus principaux. */
 		 menu = new JMenuBar();
@@ -87,7 +80,7 @@ public class FenetreJeu extends JFrame {
 		    
 		    this.setJMenuBar(menu);
 		    this.setVisible(true);
-		  
+		    
 		    /* Actions des menus. */
 		    
 		    /* Quitter. */
