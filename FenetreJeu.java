@@ -10,6 +10,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.io.IOException;
 
+import javax.print.attribute.standard.JobOriginatingUserName;
 import javax.swing.Box;
 import javax.swing.BoxLayout;
 import javax.swing.JButton;
@@ -31,20 +32,22 @@ public class FenetreJeu extends JFrame {
 	private Carte carte;
 
     JMenuBar menu;
-    JPanel sousMenu;
     JMenuItem quitter;
     JMenuItem nouveau;
-    JButton finTour;
     JMenu config;
     JMenu charger;
     JMenu sauvegarder;
     JMenu jeu;
-    
+	public static JLabel information;
+	
 	public FenetreJeu() throws IOException {
 		/* Création du titre et de l'icone */
 		super ("WarGame");
+		
 		carte = new Carte();
 	
+
+		
 		/********* Taille de la carte non correcte !**********/
 		//carte.setBackground(Color.GRAY);
 		carte.setPreferredSize(new Dimension (IConfig.LARGEUR_CARTE * IConfig.NB_PIX_CASE, 
@@ -56,14 +59,26 @@ public class FenetreJeu extends JFrame {
 		 this.setLocation(IConfig.POSITION_X, IConfig.POSITION_Y);
 		
 		 setContentPane(carte);
-		 
+		
+			this.setLayout(new BorderLayout());
+			
+			information = new JLabel();
+			information.setPreferredSize(new Dimension(400, 15));
+			information.setOpaque(true);
+			information.setHorizontalAlignment(SwingConstants.CENTER);
+			 
+			
+			JPanel panelInfo = new JPanel();
+			panelInfo.add(information);
+			
+			this.add(Carte.panelBtn, BorderLayout.NORTH);
+			this.add(panelInfo, BorderLayout.SOUTH);
 		 /* Création des menus principaux. */
 		 menu = new JMenuBar();
 		 jeu = new JMenu("Jeu");
 		 sauvegarder = new JMenu("Sauvegarder");
 		 charger = new JMenu("Restaurer");
 		 config = new JMenu("Configuration");
-		 finTour = new JButton("Fin de tour");
 
 		/* Création des options des menus. */
 		 nouveau = new JMenuItem("Nouvelle partie");
@@ -80,7 +95,6 @@ public class FenetreJeu extends JFrame {
 		    
 		    this.setJMenuBar(menu);
 		    this.setVisible(true);
-		    
 		    /* Actions des menus. */
 		    
 		    /* Quitter. */
@@ -101,9 +115,8 @@ public class FenetreJeu extends JFrame {
 		    		 repaint();
 		    		
 		      	}
-
-			
 	      });
+		    
 		    nouveau.setAccelerator(KeyStroke.getKeyStroke(KeyEvent.VK_N, ActionEvent.CTRL_MASK));
 		 
 		    

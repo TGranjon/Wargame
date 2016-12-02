@@ -17,7 +17,7 @@ public interface ICarte {
 	void mort(Soldat perso);
 	boolean actionHeros(Position pos, Position pos2);
 	void actionMonstres(); // fait jouer les monstres quand c'est leur tour !!
-	void jouerSoldats(PanneauJeu pj);
+	void jouerSoldats();
 	void toutDessiner(Graphics g);
 	/** rajouter methode pour les actions des monstres 'deplacement' eventuellement action (combat)***/
 }
