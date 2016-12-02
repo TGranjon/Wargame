@@ -35,6 +35,18 @@ public abstract class Soldat extends Element implements ISoldat {
 	public void seDeplace(Position newPos){
 		
 	}
+	
+	public void repos()
+	{
+		if(this.vie<this.POINTS_DE_VIE_MAX)
+		{
+			this.vie += (10*this.POINTS_DE_VIE_MAX)/100; /*Le repos rend 10% des PV max*/
+			if(this.vie>this.POINTS_DE_VIE_MAX)
+			{
+				this.vie=this.POINTS_DE_VIE_MAX;
+			}
+		}
+	}
 
 	
 	

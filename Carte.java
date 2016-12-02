@@ -8,9 +8,11 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseMotionListener;
 import java.util.ArrayList;
 
 import javax.swing.ImageIcon;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
@@ -41,21 +43,23 @@ public class Carte extends JPanel implements ICarte, ActionListener {
 	/** Indique la case courante sélectionnée. Correspond également au soldat selectionné dans le combat. */
 	private int caseCliquee = -1;
 	private JLabel imageDebutJeu;
-	
-	private JLabel information;
-	
+
+    JButton finTour;
+	public static JPanel panelBtn;
+    
 	public Carte() throws IOException {
 	
+		finTour = new JButton("Fin de tour");
+		panelBtn = new JPanel();
+		panelBtn.add(finTour);
+		panelBtn.setOpaque(false);
+		
 		generer();
 	 	//this.setPreferredSize(new Dimension (IConfig.LARGEUR_CARTE * IConfig.NB_PIX_CASE, 
 		//		 IConfig.HAUTEUR_CARTE * IConfig.NB_PIX_CASE));
 	 //	imageDebutJeu = new JLabel(new ImageIcon( this.getClass().getResource( "src/image_debut_jeu.png")));
 		//this.add(imageDebutJeu);
-		information = new JLabel();
-		this.add(information, BorderLayout.SOUTH);
-		information.setOpaque(true);
-		information.setPreferredSize(new Dimension(400, 30));
-		information.setHorizontalAlignment(SwingConstants.CENTER);
+
 		
 		   addMouseListener(new MouseAdapter() {
 		    	// Capture du clic sur la carte 
@@ -64,8 +68,6 @@ public class Carte extends JPanel implements ICarte, ActionListener {
 					Position pos = new Position(e.getX() / IConfig.NB_PIX_CASE , e.getY() / IConfig.NB_PIX_CASE);
 					int case_encours = pos.getNumCase();
 					System.out.println("la case cliqueeeeee: "+case_encours);
-					
-					information.setText(pos.toString() + getElement(pos));
 					
 					// On change de héros si la case n'est pas vide, qu'il s'agit bien d'un soldat et que le soldat est affiché. 
 					if(elements[case_encours] != null 
@@ -104,6 +106,26 @@ public class Carte extends JPanel implements ICarte, ActionListener {
 				
 			
 		    });  
+		   
+		   addMouseMotionListener(new MouseMotionListener() {
+
+			public void mouseDragged(MouseEvent e) {}
+
+			public void mouseMoved(MouseEvent e) {
+				Position pos = new Position(e.getX() / IConfig.NB_PIX_CASE , e.getY() / IConfig.NB_PIX_CASE);
+				FenetreJeu.information.setText(pos.toString() + getElement(pos));
+				
+			}
+			   
+		   });
+		   
+		    finTour.addActionListener(new ActionListener() {
+				
+				public void actionPerformed(ActionEvent e) {
+					jouerSoldats();
+					
+				}
+			});
 	 
 	}
 	/**
@@ -529,8 +551,15 @@ public boolean actionHeros(Position pos, Position pos2) {
 	
 	
 	
-	public void jouerSoldats(PanneauJeu pj) {
-		// TODO Auto-generated method stub
+	public void jouerSoldats() {
+		System.out.println("ROCHER");
+		for(int i=0;i<heros.size();i++)
+		{
+			if(heros.get(i).getAJoue()==false)
+			{
+				heros.get(i).repos();
+			}
+		}
 		
 	}
 	
