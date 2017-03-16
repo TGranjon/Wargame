@@ -1,6 +1,11 @@
 package wargame;
 
- 
+/**
+ * @author Thomas GRANJON
+ * @author Axel SOFONEA
+ * @author Sarah RIGHI
+ *
+ */
 
 import java.awt.Color;
 
@@ -16,6 +21,12 @@ public interface IConfig {
 	Color COULEUR_OBSTACLE = Color.yellow, COULEUR_SOLDAT = Color.orange;
 	
 	/** Chemin du dossier des images */
-	String CHEMIN_IMAGE = "/image/";
-	double FPS = 60.0;
+	String CHEMIN = "../Images/";
+	
+	/** Chemin du dossier des sauvegardes */
+    String CHEMIN_SAUVEGARDE = "wargame_sauvegarde/"; 
+	
+	/** Nom d'un fichier de sauvegarder. */
+	String NOM_SAUVEGARDE = "wargame";
+	
 }
